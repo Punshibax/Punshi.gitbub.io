@@ -94,7 +94,7 @@
       width: 80%;
       max-width: 400px;
       text-align: center;
-      border-radius: 15px; /* More rounded corners */
+      border-radius: 15px; /* Rounded corners */
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
@@ -112,7 +112,7 @@
       cursor: pointer;
     }
 
-    /* Cleaner Footer Text */
+    /* Footer styles */
     .footer {
       margin-top: 20px;
       font-size: 14px;
@@ -162,29 +162,25 @@
   <!-- Include qrcode.js library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
-    const upiID = "punshibai@fam"; // UPI ID
-    let lastRequestTime = 0;
+    const upiID = "punshibai@fam"; // Updated UPI ID
 
-    // Modal control
+    // Modal functionality
     const modal = document.getElementById("myModal");
     const closeModal = document.getElementsByClassName("close")[0];
 
-    // Show modal when page is loaded
     window.onload = () => {
-      modal.style.display = "block";
+      modal.style.display = "block"; // Show modal on page load
     };
 
-    // Close modal when user clicks on <span> (x)
     closeModal.onclick = function() {
-      modal.style.display = "none";
-    }
+      modal.style.display = "none"; // Close modal when 'x' is clicked
+    };
 
-    // Close modal if the user clicks outside of the modal
     window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
+      if (event.target === modal) {
+        modal.style.display = "none"; // Close modal if clicked outside
       }
-    }
+    };
 
     function generateQR() {
       const amount = document.getElementById("amount").value;
@@ -204,17 +200,13 @@
       const upiURL = `upi://pay?pa=${upiID}&pn=PunshiOfficialStore&am=${amount}&cu=INR`;
 
       try {
-        // Generate QR Code
         new QRCode(qrCodeDiv, {
           text: upiURL,
           width: 200,
           height: 200,
         });
 
-        // Show QR Code and message
         qrMessage.style.display = "block";
-
-        // Show "Pay with UPI" button
         payWithUPIButton.style.display = "block";
         payWithUPIButton.onclick = () => {
           window.location.href = upiURL;
@@ -225,19 +217,16 @@
       }
     }
 
-    // Attach event listener to "Generate QR Code" button
     document.getElementById("generateQRButton").addEventListener("click", generateQR);
 
-    // Automatically update QR code when user changes the amount
-    document.getElementById("amount").addEventListener("input", function() {
+    document.getElementById("amount").addEventListener("input", function () {
       const qrCodeDiv = document.getElementById("qrCode");
       const qrMessage = document.getElementById("qrMessage");
       const payWithUPIButton = document.getElementById("payWithUPIButton");
 
-      // Clear previous QR code
       qrCodeDiv.innerHTML = "";
-      qrMessage.style.display = "none"; // Hide QR code message
-      payWithUPIButton.style.display = "none"; // Hide Pay Now button
+      qrMessage.style.display = "none";
+      payWithUPIButton.style.display = "none";
     });
   </script>
 </body>
