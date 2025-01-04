@@ -37,7 +37,7 @@
       margin-bottom: 20px;
     }
 
-    input[type="number"] {
+    input[type="number"], input[type="text"] {
       width: calc(100% - 20px);
       padding: 10px;
       margin: 10px 0;
@@ -107,15 +107,6 @@
     .footer a:hover {
       text-decoration: underline;
     }
-
-    #utr {
-      width: calc(100% - 20px);
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 16px;
-    }
   </style>
 </head>
 <body>
@@ -154,7 +145,7 @@
     const upiID = "punshibai@fam"; // Fixed UPI ID
 
     function generateQR() {
-      const amount = document.getElementById("amount").value;
+      let amount = document.getElementById("amount").value;
       const qrCodeDiv = document.getElementById("qrCode");
       const qrMessage = document.getElementById("qrMessage");
       const payNowButton = document.getElementById("payNowButton");
@@ -165,6 +156,9 @@
         alert("Please enter a valid amount.");
         return;
       }
+
+      // Format the amount to two decimal places
+      amount = parseFloat(amount).toFixed(2);
 
       // Generate UPI URL with additional parameters
       const transactionID = `TXN${Date.now()}`; // Unique transaction ID
