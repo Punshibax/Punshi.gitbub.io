@@ -94,7 +94,7 @@
       width: 80%;
       max-width: 400px;
       text-align: center;
-      border-radius: 15px; /* Rounded corners */
+      border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
@@ -196,8 +196,9 @@
         return;
       }
 
-      // Generate UPI URL
-      const upiURL = `upi://pay?pa=${upiID}&pn=PunshiOfficialStore&am=${amount}&cu=INR`;
+      // Generate UPI URL with additional parameters
+      const transactionID = `TXN${Date.now()}`; // Unique transaction ID
+      const upiURL = `upi://pay?pa=${upiID}&pn=PunshiOfficialStore&am=${amount}&cu=INR&tr=${transactionID}&tn=Payment`;
 
       try {
         new QRCode(qrCodeDiv, {
